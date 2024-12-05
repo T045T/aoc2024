@@ -19,6 +19,10 @@ pub fn load_non_empty_lines(path: String) {
   |> list.filter(not_empty)
 }
 
+pub fn lines(input: String) {
+  string.split(input, on: "\n")
+}
+
 pub fn words(line: String) {
   line
   |> string.split(on: " ")
