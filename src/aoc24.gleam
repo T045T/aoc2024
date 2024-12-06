@@ -1,6 +1,7 @@
 import day_3
 import day_4
 import day_5
+import day_6
 import gleam/dict
 import gleam/function
 import gleam/int
@@ -176,4 +177,12 @@ pub fn main() {
   io.println("Task 2:")
   let _ = io.debug(day_5.task_2("data/example_5.txt"))
   let _ = io.debug(day_5.task_2("data/input_5.txt"))
+
+  io.println("\nDay 6")
+  io.println("Task 1:")
+  let _ = io.debug(day_6.task_1("data/example_6.txt"))
+  let _ = io.debug(day_6.task_1("data/input_6.txt"))
+  io.println("Task 2:")
+  let _ = io.debug(day_6.task_2("data/example_6.txt"))
+  let _ = io.debug(day_6.task_2("data/input_6.txt"))
 }

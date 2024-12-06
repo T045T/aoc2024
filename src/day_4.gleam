@@ -5,22 +5,34 @@ import gleam/string
 import gleam/string_tree
 import helpers
 
-type Vec2 =
+pub type Vec2 =
   #(Int, Int)
 
 fn parse_line(line: String, row: Int, col: Int, map: Dict(Vec2, String)) {
   case string.pop_grapheme(line) {
     Ok(#(c, rest)) ->
-      parse_line(rest, row, col + 1, dict.insert(map, #(row, col), c))
+      parse_line(rest, row, col + 1, dict.insert(map, #(col, row), c))
     _ -> map
   }
 }
 
-fn vec_add(lhs: Vec2, rhs: Vec2) -> Vec2 {
+pub fn vec_add(lhs: Vec2, rhs: Vec2) -> Vec2 {
   #(lhs.0 + rhs.0, lhs.1 + rhs.1)
 }
 
-fn vec_neg(v: Vec2) -> Vec2 {
+pub fn vec_sub(lhs: Vec2, rhs: Vec2) -> Vec2 {
+  #(lhs.0 - rhs.0, lhs.1 - rhs.1)
+}
+
+pub fn vec_dot(lhs: Vec2, rhs: Vec2) -> Int {
+  lhs.0 * rhs.0 + lhs.1 * rhs.1
+}
+
+pub fn vec_mag_sq(v: Vec2) -> Int {
+  v.0 * v.0 + v.1 * v.1
+}
+
+pub fn vec_neg(v: Vec2) -> Vec2 {
   #(v.0 * -1, v.1 * -1)
 }
 
@@ -93,11 +105,15 @@ fn count_x_mas(map: Dict(Vec2, String)) {
   |> list.reduce(fn(a, b) { a + b })
 }
 
-pub fn task_1(path: String) {
+pub fn load_map(path: String) -> Dict(Vec2, String) {
   helpers.load_non_empty_lines(path)
   |> list.index_map(fn(line, index) { parse_line(line, index, 0, dict.new()) })
   |> list.reduce(dict.merge)
   |> result.unwrap(dict.new())
+}
+
+pub fn task_1(path: String) {
+  load_map(path)
   |> count_xmas()
 }
 
