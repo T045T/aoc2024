@@ -1,15 +1,7 @@
-import day_4.{type Vec2, load_map, vec_add, vec_mag_sq, vec_sub}
-import gleam/bool
-import gleam/dict.{type Dict}
 import gleam/int
-import gleam/io
 import gleam/list
-import gleam/option.{type Option, None, Some}
-import gleam/order
 import gleam/result
-import gleam/set.{type Set}
 import gleam/string
-import gleam/yielder
 import helpers
 
 pub fn task_1(filepath: String) {
@@ -50,14 +42,16 @@ fn do_plausible(goal, args, operators, current) {
   case args {
     [] -> list.any(current, fn(x) { x == goal })
     [arg, ..rest] -> {
-      let new_current =
-        {
-          use operator <- list.map(operators)
-          use c <- list.map(current)
-          operator(c, arg)
-        }
-        |> list.flatten()
+      let new_current = {
+        use operator <- list.flat_map(operators)
+        list.filter_map(current, fn(c) {
+          case operator(c, arg) {
+            x if x > goal -> Error(Nil)
+            x -> Ok(x)
+          }
+        })
         |> list.filter(fn(x) { x <= goal })
+      }
       do_plausible(goal, rest, operators, new_current)
     }
   }
