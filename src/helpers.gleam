@@ -28,3 +28,7 @@ pub fn words(line: String) {
   |> string.split(on: " ")
   |> list.filter(not_empty)
 }
+
+pub fn sum(l: List(Int)) {
+  list.fold(l, 0, fn(a, b) { a + b })
+}

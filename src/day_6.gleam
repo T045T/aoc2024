@@ -1,7 +1,9 @@
 import day_4.{type Vec2, load_map, vec_add, vec_mag_sq, vec_sub}
 import gleam/bool
 import gleam/dict.{type Dict}
+import gleam/function
 import gleam/int
+import gleam/io
 import gleam/list
 import gleam/option.{type Option, None, Some}
 import gleam/order
@@ -123,36 +125,42 @@ fn do_find_possible_cycles_2(
           }
           || set.contains(obstacles, new_obstacle)
         }
-      use <- bool.guard(
-        when: !can_put_obstacle,
-        return: do_find_possible_cycles_2(
-          obstacles,
-          rest_path,
-          new_previous_steps,
-          acc,
-        ),
-      )
-      let causes_cycle =
-        detect_cycle(
-          current_pos,
-          set.insert(obstacles, new_obstacle),
-          previous_steps,
-        )
-      use <- bool.guard(
-        when: causes_cycle,
-        return: do_find_possible_cycles_2(
-          obstacles,
-          rest_path,
-          new_previous_steps,
-          [new_obstacle, ..acc],
-        ),
-      )
-      do_find_possible_cycles_2(obstacles, rest_path, new_previous_steps, acc)
+      case can_put_obstacle {
+        False ->
+          do_find_possible_cycles_2(
+            obstacles,
+            rest_path,
+            new_previous_steps,
+            acc,
+          )
+        True -> {
+          let new_obstacles = set.insert(obstacles, new_obstacle)
+          let causes_cycle =
+            detect_cycle(current_pos, new_obstacles, previous_steps)
+          case causes_cycle {
+            True -> {
+              do_find_possible_cycles_2(
+                obstacles,
+                rest_path,
+                new_previous_steps,
+                [new_obstacle, ..acc],
+              )
+            }
+            False ->
+              do_find_possible_cycles_2(
+                obstacles,
+                rest_path,
+                new_previous_steps,
+                acc,
+              )
+          }
+        }
+      }
     }
   }
 }
 
-fn detect_cycle(p: Position, obstacles: Set(Vec2), seen: Set(Position)) -> Bool {
+fn detect_cycle(p: Position, obstacles: Set(Vec2), seen: Set(Position)) {
   use <- bool.guard(when: set.contains(seen, p), return: True)
   case move(p, obstacles) {
     Ok(new_p) -> detect_cycle(new_p, obstacles, set.insert(seen, p))
