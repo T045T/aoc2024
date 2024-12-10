@@ -1,8 +1,11 @@
+import day_10
 import day_3
 import day_4
 import day_5
 import day_6
 import day_7
+import day_8
+import day_9
 import gleam/dict
 import gleam/function
 import gleam/int
@@ -187,11 +190,34 @@ pub fn main() {
   // let _ = io.debug(day_6.task_2("data/example_6.txt"))
   // let _ = io.debug(day_6.task_2("data/input_6.txt"))
 
-  io.println("\nDay 7")
+  // io.println("\nDay 7")
+  //   io.println("Task 1:")
+  //   let _ = io.debug(day_7.task_1("data/example_7.txt"))
+  //   let _ = io.debug(day_7.task_1("data/input_7.txt"))
+  //   // io.println("Task 2:")
+  //   let _ = io.debug(day_7.task_2("data/example_7.txt"))
+  //   let _ = io.debug(day_7.task_2("data/input_7.txt"))
+  io.println("\nDay 8")
   io.println("Task 1:")
-  let _ = io.debug(day_7.task_1("data/example_7.txt"))
-  let _ = io.debug(day_7.task_1("data/input_7.txt"))
-  // io.println("Task 2:")
-  let _ = io.debug(day_7.task_2("data/example_7.txt"))
-  let _ = io.debug(day_7.task_2("data/input_7.txt"))
+  let _ = io.debug(day_8.task_1("data/example_8.txt"))
+  let _ = io.debug(day_8.task_1("data/input_8.txt"))
+  io.println("Task 2:")
+  let _ = io.debug(day_8.task_2("data/example_8.txt"))
+  let _ = io.debug(day_8.task_2("data/input_8.txt"))
+  // io.println("\nDay 9")
+  // io.println("Task 1:")
+  // let _ = io.debug(day_9.task_1("data/example_9.txt"))
+  // let _ = io.debug(day_9.task_1("data/input_9.txt"))
+  // // io.println("Task 2:")
+  //  let _ = io.debug(day_9.task_2("data/example_9.txt"))
+  // let _ = io.debug(day_9.task_2("data/input_9.txt"))
+  io.println("\nDay 10")
+  io.println("Task 1:")
+  let _ = io.debug(day_10.task_1("data/example_10.txt"))
+  let _ = io.debug(day_10.task_1("data/example_10b.txt"))
+  let _ = io.debug(day_10.task_1("data/input_10.txt"))
+  io.println("Task 2:")
+  let _ = io.debug(day_10.task_2("data/example_10.txt"))
+  let _ = io.debug(day_10.task_2("data/example_10b.txt"))
+  let _ = io.debug(day_10.task_2("data/input_10.txt"))
 }
