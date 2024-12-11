@@ -1,4 +1,5 @@
 import day_10
+import day_11
 import day_3
 import day_4
 import day_5
@@ -220,4 +221,13 @@ pub fn main() {
   let _ = io.debug(day_10.task_2("data/example_10.txt"))
   let _ = io.debug(day_10.task_2("data/example_10b.txt"))
   let _ = io.debug(day_10.task_2("data/input_10.txt"))
+  io.println("\nDay 11")
+  io.println("Task 1:")
+  // let _ = io.debug(day_11.task_1("data/example_11.txt"))
+  let _ = io.debug(day_11.task_1("data/example_11b.txt"))
+  let _ = io.debug(day_11.task_1("data/input_11.txt"))
+  io.println("Task 2:")
+  // let _ = io.debug(day_11.task_2("data/example_11.txt"))
+  // let _ = io.debug(day_11.task_2("data/example_11b.txt"))
+  let _ = io.debug(day_11.task_2("data/input_11.txt"))
 }

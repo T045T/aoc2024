@@ -25,6 +25,7 @@ pub fn lines(input: String) {
 
 pub fn words(line: String) {
   line
+  |> string.trim()
   |> string.split(on: " ")
   |> list.filter(not_empty)
 }
